@@ -1,5 +1,6 @@
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import Navbar from "../containers/Navbar/Navbar";
+import News from "../Pages/News/News";
 import GOT from "../screens/GOT/GOT";
 import ProfilStack from "../stacks/ProfilStack";
 
@@ -16,6 +17,7 @@ const GlobalDrawer = () => {
 			/>
 
 			<Drawer.Screen name="got" component={GOT} options={{ title: "Game of thrones" }} />
+			<Drawer.Screen name="news" component={News} options={{ title: "News" }} />
 		</Drawer.Navigator>
 	);
 };

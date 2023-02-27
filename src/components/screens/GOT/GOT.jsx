@@ -18,7 +18,7 @@ const GOT = () => {
 					<View>
 						<Text>{personnage.fullName}</Text>
 						<Image
-							style={{ width: "40%", height: 300 }}
+							style={{ width: 300, height: 300 }}
 							source={{ uri: personnage.imageUrl }}
 						/>
 						<Text>{personnage.title}</Text>
