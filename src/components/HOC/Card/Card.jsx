@@ -1,6 +1,3 @@
-//rfc: React functional component
-//rnfc: React Native functional component
-
 import { View, Text, StyleSheet } from "react-native";
 import { colors } from "../../../styles/colors";
 
