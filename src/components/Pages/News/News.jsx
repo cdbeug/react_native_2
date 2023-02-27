@@ -7,6 +7,7 @@ import {
     TouchableOpacity,
 }
     from "react-native";
+import * as WebBrowser from 'expo-web-browser';
 import axios from "axios";
 import InputWithError from "../../UI/InputWithError/InputWithError";
 import { AntDesign } from "@expo/vector-icons";
@@ -15,16 +16,20 @@ const API_KEY = "621f73acac1f47ba82eff38bf9c5169f";
 
 const NEWS_GET_TOP_HEADLINES =
     "https://newsapi.org/v2/top-headlines?country=fr&apiKey=" + API_KEY;
+
 const NEWS_GET_QUERY = (q) =>
     `https://newsapi.org/v2/everything?language=fr&q=${q}&apiKey=${API_KEY}`;
+
 const News = () => {
     const [listNews, setListNews] = useState([]);
     const [query, setQuery] = useState("");
     const [queryError, setQueryError] = useState("");
+
     function handleQuery(text) {
         setQuery(text);
         setQueryError("");
     }
+
     function search() {
         if (query.length > 1) {
             axios.get(NEWS_GET_QUERY(query)).then((reponse) => {
@@ -34,11 +39,16 @@ const News = () => {
             setQueryError("Veuillez entrer un mot clé...");
         }
     }
+
     useEffect(() => {
         axios.get(NEWS_GET_TOP_HEADLINES).then((reponse) => {
             setListNews(reponse.data.articles);
         });
     }, []);
+
+    async function go_to_page(url) {
+        await WebBrowser.openBrowserAsync(url);
+    }
 
     return (
         <View style={styles.container}>
@@ -78,6 +88,11 @@ const News = () => {
                         <Text>
                             {article.content}
                         </Text>
+                        <TouchableOpacity onPress={() => {
+                            go_to_page(article.url);
+                        }}>
+                            Aller à {article.title}
+                        </TouchableOpacity>
                     </View>
                 );
             })}
